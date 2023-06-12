@@ -28,13 +28,17 @@ The project consists in a clasificator of tools, able to classify 4 types of too
 
 ## 3. Project assembly in Tinkercad
 For the circuit development in the tinkercad plataform, we see some little limitations. These limitations are going to make the circuit mildly different from the one we finally made in the project.
+
 ![imagen](https://github.com/jaimachu/Maching-Learning-TensorFlow/assets/116104294/642d4797-5838-489a-a862-fd5733fa4c3e)
+
 First of all, there is not the controller plate of the stepper motor so we had to create a small circuit to replace it. The other change is that we could not add the joystick in the circuit of the platform due to it does not exists.
 
 ## 4. Inteligence Artificial
 For the IA development of our proyect, we tried to implement by two different forms: from the library of TensorFlow, coding all the IA, and from the web platform of EdgeImpulse. The implementation of the IA has been very difficult due to the foul of documentation, problems with versions, problems with the memory of the plate…
 The first model of IA that we created was created by the library of TensorFlow. Python is used and before the development of our model we had to develop a dataset (set of data that the model will take to train and recognize patterns of the data). The dataset was done through the page of EdgeImpulse with the camera of the Arduino Nano 33.
+
 ![imagen](https://github.com/jaimachu/Maching-Learning-TensorFlow/assets/116104294/f336c72e-0057-4287-a02e-68be40f46d3c)
+
 The dataset consist of near 1200 photos, that is going to split between training photos and testing photos. The training photos will be used by the model to recognize patterns of the type of classes that we had specified in the images. Once the model is trained, we are going to pass images that we know the class of the image and the model will predict the class.
 Once the dataset is finished, is the hour to code our model in Python. Here is an example of image classification that we have found very useful:
 https://www.tensorflow.org/tutorials/images/classification?hl=es-419
@@ -59,7 +63,9 @@ class_names = np.array(sorted(
     [item.name for item in data_dir.glob('*') if item.name != "LICENSE.txt"]))
 ```
 This is the configuration of the directories where is the dataset with the images. The name of the classes will be taken in function of the name of the folders. The dataset is organized like this:
+
 ![imagen](https://github.com/jaimachu/Maching-Learning-TensorFlow/assets/116104294/38c3840d-b9c2-4b2e-9f19-9405e4cf918c)
+
 ```
 val_size = int(image_count * 0.2)
 train_ds = list_ds.skip(val_size)
@@ -103,7 +109,9 @@ We had a lot of different neural networks, but this is the most efficient neural
 - Dropout: layer that prevents overfitting.
 - Flatten: transforms the image from the previous output into an array.
 - Dense: obtains the probability of each class through its softmax activation function from the obtained array.
+
 ![imagen](https://github.com/jaimachu/Maching-Learning-TensorFlow/assets/116104294/af206e81-bb63-4555-a93a-f141ad9748b8) ![imagen](https://github.com/jaimachu/Maching-Learning-TensorFlow/assets/116104294/b76693c9-6f6f-44c8-98c6-74b8a2240594)
+
 Once we have trained the model with a total of 100 epochs and a learning ratio α of 0.01, we save the model in our directory with an extension of .h.
 Another of the problems that we found is that the model.h is not capable of being supported by the Arduino Nano 33 due to the low capacity of the plate, so we will have to transform the model to a TensorFlow Lite model and then to a model of TensorFlow Lite Micro.
 For the first transformation to micro, we created the following method where the TensorFlow Lite converter is used and we are going to save the model with the name that appears below:
@@ -167,13 +175,21 @@ In the following link there is a discussion thread from the Arduino forum where 
 https://forum.arduino.cc/t/compilation-issue-with-tensorflow-lite-for-microcontrollers-in-arduino-web-editor/1085157/3
 
 Although our team could not complete this phase due to lack of time, we invite future groups to try it, starting from the point where we left off.
+
 ![imagen](https://github.com/jaimachu/Maching-Learning-TensorFlow/assets/116104294/232f0076-7031-4146-a2a3-d9dbe2b20ddf)
+
 Finally, to avoid problems with the library we have made use of the EdgeImpulse web platform, which is a page where we will be able to create a dataset, train a model, edit the model, export the model and various other functions. We have only had to specify to the page what our dataset would be like, what we want to classify and the neural network. The neural network that we have used in EdgeImpulse is very similar to the network of the previous model in that it generates a very lightweight and efficient model. Here is a configuration of the input images similar to the previous model:
+
 ![imagen](https://github.com/jaimachu/Maching-Learning-TensorFlow/assets/116104294/aa59f063-9acb-4eb6-9eb3-7865985af84b)
+
 Training of the model:
+
 ![imagen](https://github.com/jaimachu/Maching-Learning-TensorFlow/assets/116104294/e787cec0-19c6-4053-93b5-801b3c20f07c)
+
 Here we are shown a graph of the success rate that the model has had in the learning stage and the loss:
+
 ![imagen](https://github.com/jaimachu/Maching-Learning-TensorFlow/assets/116104294/34e0d347-8997-4f33-8c79-a440878e4d4e)
+
 We can also observe how the data has been dispersed when classifying them. The model size is 149K, where the maximum size of the board is 256K. We have noticed how if the model weighs more than 160K, the board runs out of memory and the model cannot be inserted.
 
 The model that we have could be retrain(may be the case that when adjusting the weights of the neural network improves or worses the model) and tested with the data of the dataset that can predict the class to wich it belongs. After all, the testing part would be done by us in our embedded system when identifying one object or another.
@@ -202,7 +218,9 @@ Lastly, for the tool sorting box, we have used small plastic bottles that were c
 | Continuous rotation servomotor | 12.50€ |
 | Total: 52.63€ |
 ## Implementation, failures and solutions.
+
 ![imagen](https://github.com/jaimachu/Maching-Learning-TensorFlow/assets/116104294/43440a41-051b-4cb1-8fb7-d2b83464fb74)
+
 For the implementation of the project, we divided it into different parts: the conveyor belt, the mechanical arm, and the sorting boxes.
 
 For the conveyor belt part, we used the continuous rotation servomotor, wooden sticks to create the path for the belt, small sticks as pivoting axes for the belt, and an exercise band as the belt itself.
@@ -214,9 +232,13 @@ Firstly, to create the conveyor belt, we initially considered using the ultrason
 For the mechanical arm, we crafted the pieces using plywood and assembled them with double-sided tape and screws. The initial design involved an electromagnet instead of a basket. However, the purchased magnet lacked sufficient strength to lift larger screws, leading us to change the design and replace the magnet with a basket.
 
 The final part involved the sorting boxes. We utilized the kit’s stepper motor to rotate the boxes based on the recognized tool. After pressing the button to signal the AI to start identifying, the motor would rotate to position the boxes correctly. The arm would then pick up the tool and place it in the appropriate box. Afterwards, the boxes would return to their default position.
+
 ![imagen](https://github.com/jaimachu/Maching-Learning-TensorFlow/assets/116104294/218bd317-5296-4f76-90d5-0d84aefccc06)
+
 In this part, there weren’t many issues, aside from adjusting the motor speed. However, we realized that it wasn’t crucial, so we kept it at its default setting. Finally, we assembled all these components on a particle board, to which we attached legs to elevate it from the table. This was done to create a hole to accommodate the stepper motor, allowing the sorting boxes to sit lower. This ensured that there would be no collisions when rotating the arm’s basket to release the object.
+
 ![imagen](https://github.com/jaimachu/Maching-Learning-TensorFlow/assets/116104294/214e6a3f-a1e0-414c-a503-c8beca7c046f)
+
 ## 6. Software
 In this part we will explain how the software works and its use cases.
 ## Cases of use
